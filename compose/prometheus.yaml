@@ -1,0 +1,19 @@
+services:
+  prometheus:
+    image: docker.io/prom/prometheus
+    container_name: prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yaml'
+    network_mode: host
+    ports:
+      - '9090'
+    restart: always
+    volumes:
+      - type: bind
+        source: promdata
+        target: /prometheus
+      - type: bind
+        source: /data/podman/etc/prometheus/prometheus.yaml
+        target: /etc/prometheus/prometheus.yaml
+volumes:
+  promdata:

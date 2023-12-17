@@ -1,0 +1,17 @@
+---
+version: '3.8'
+
+services:
+  node_exporter:
+    image: docker.io/carlosedp/arm_exporter
+    container_name: arm_exporter
+    command:
+      - '--collector.textfile.directory=/etc/arm_exporter/'
+    network_mode: host
+    ports:
+      - "9243"
+    restart: always
+    volumes:
+      - /etc/hostname:/etc/nodename:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/TZ:ro
