@@ -1,11 +1,9 @@
-# podman run -p 9817:9817 ghcr.io/danopstech/starlink_exporter
-
 services:
   starlink_exporter:
-    image: ghcr.io/danopstech/starlink_exporter
     container_name: starlink_exporter
-    working_dir: /
+    image: ghcr.io/danopstech/starlink_exporter
     network_mode: host
     ports:
       - "9817"
-   restart: no
+    restart: always
+    working_dir: /
