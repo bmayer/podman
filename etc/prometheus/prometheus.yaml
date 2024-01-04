@@ -20,10 +20,24 @@ rule_files:
 # Here it's Prometheus itself.
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  # podman container
   - job_name: "prometheus"
     static_configs:
       - targets: ["localhost:9090"]
       - targets: ["localhost:9100"]
+        labels:
+          role: 'node_exporter'
+  # podman container
+  - job_name: "starlink"
+    static_configs:
+      - targets: ["localhost:9817"]
+        labels:
+          role: 'starlink_exporter'
+  - job_name: "openwrt"
+    static_configs:
+      - targets: ["192.168.8.1:9100"]
+        labels:
+          role: 'openwrt_exporter'
 
   - job_name: 'node'
     scrape_interval: 15s
